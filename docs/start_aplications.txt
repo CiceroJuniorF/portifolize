@@ -1,0 +1,13 @@
+
+##### Install depedencies
+npm install
+
+
+###### Start microserviço app
+
+npm start
+
+
+###### Start spa (Single Page Application)
+
+ng server
