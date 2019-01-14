@@ -33,9 +33,11 @@ if (!isProduction) {
 if(isProduction){
   mongoose.connect(process.env.MONGODB_URI);
 } else {
-  mongoose.connect('"mongodb://localhost:27017/portifolize_db"');
+  mongoose.connect('mongodb://localhost:27017/portifolize_db');
   mongoose.set('debug', true);
 }
+
+
 
 require('./models/User');
 require('./models/Article');
@@ -44,12 +46,7 @@ require('./config/passport');
 
 app.use(require('./routes'));
 
-/// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  var err = new Error('Not Found');
-  err.status = 404;
-  next(err);
-});
+
 
 /// error handlers
 
@@ -76,6 +73,11 @@ app.use(function(err, req, res, next) {
     message: err.message,
     error: {}
   }});
+});
+
+app.use(express.static(path.join(__dirname,'./spa')));
+app.get('*',(req,res)=>{
+  res.sendFile(path.join(__dirname,'./spa/index.html'))
 });
 
 // finally, let's start our server...
