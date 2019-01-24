@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { ConsumerService } from './consumer.service';
+import { ConsumerService } from './comum/consumer/consumer.service';
+
 
 @Component({
   selector: 'app-root',
@@ -12,9 +13,10 @@ export class AppComponent {
 
   }
   ngOnInit(){
-    this._service.example().subscribe( (response:any)=>{
-      if(response != null)
+    this._service.execute('hello','init').subscribe( (response:any)=>{
+      if(response != null){
         this.title= response.init;
+      }        
     });
   }
   
